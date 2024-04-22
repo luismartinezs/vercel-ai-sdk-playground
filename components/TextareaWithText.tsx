@@ -18,7 +18,7 @@ export function TextareaWithText({
   return (
     <div className="grid w-full gap-1.5">
       <Label htmlFor={id}>{label}</Label>
-      <Textarea placeholder={placeholder} id={id} aria-describedby={`desc-${id}`} />
+      <Textarea placeholder={placeholder} id={id} aria-describedby={`desc-${id}`} rows={5} cols={50} />
       <p className="text-sm text-muted-foreground" id={`desc-${id}`}>
         {description}
       </p>
