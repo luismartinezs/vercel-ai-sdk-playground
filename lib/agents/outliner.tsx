@@ -7,7 +7,7 @@ import Outline from '@/components/Outline'
 
 export async function outliner(
   uiStream: ReturnType<typeof createStreamableUI>,
-  messages: ExperimentalMessage[]
+  docs: ExperimentalMessage[]
 ) {
   const openai = new OpenAI({
     apiKey: env.OPENAI_API_KEY,
@@ -60,7 +60,7 @@ export async function outliner(
 
     This structure ensures that the outline created covers all essential aspects of the text in a well-organized manner.
     `,
-    messages,
+    messages: docs,
     schema: outlineSchema
   })
     .then(async result => {

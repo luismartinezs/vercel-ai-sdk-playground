@@ -1,12 +1,14 @@
-'use client'
+"use client";
 
-import DocuPrompt from '@/components/DocuPrompt'
-import React from 'react'
+import DocuPrompt from "@/components/DocuPrompt";
+import React from "react";
 
 const KataPrompter = (): React.JSX.Element => {
   return (
-    <DocuPrompt />
-  )
-}
+    <>
+      <DocuPrompt />
+    </>
+  );
+};
 
-export default KataPrompter
+export default KataPrompter;

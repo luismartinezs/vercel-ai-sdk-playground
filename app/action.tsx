@@ -1,5 +1,8 @@
+import { Spinner } from "@/components/ui/spinner";
+import { outliner } from "@/lib/agents";
 import { ExperimentalMessage, ExperimentalUserMessage } from "ai";
 import {
+  StreamableValue,
   createAI,
   createStreamableUI,
   createStreamableValue,
@@ -14,28 +17,50 @@ async function submitDocs(formData?: FormData) {
   const isGenerating = createStreamableValue(true);
 
   const content = formData?.get("input") as string;
+  const messages: ExperimentalMessage[] = aiState.get() as any;
+
+  console.log(messages);
 
   if (content) {
-    const message: ExperimentalUserMessage = { role: "user", content };
-    aiState.update({...aiState.get(), docs: message});
+    const message = { role: "user", content };
+    messages.push(message as ExperimentalMessage);
+    aiState.update([...(aiState.get() as any), message]);
   }
 
-  uiStream.done()
-  isGenerating.done()
-  aiState.done(aiState.get())
+  uiStream.update(<Spinner />);
 
-  console.log(aiState.get())
+  const outline = await outliner(uiStream, messages);
+
+  console.log(outline);
+
+  isGenerating.done(false);
+  uiStream.done();
+  aiState.done([
+    ...aiState.get(),
+    {
+      role: "assistant",
+      content: JSON.stringify(outline, null, 2),
+    },
+  ]);
 
   return {
     isGenerating: isGenerating.value,
-    component: uiStream.value
-  }
+    component: uiStream.value,
+  };
 }
 
 const initialAIState: {
-  docs?: ExperimentalUserMessage;
-} = {};
-const initialUIState: {}[] = [];
+  role: "user" | "assistant" | "system" | "function" | "tool";
+  content: string;
+  id?: string;
+  name?: string;
+}[] = [];
+
+const initialUIState: {
+  id: number;
+  isGenerating: StreamableValue<boolean>;
+  component: React.ReactNode;
+}[] = [];
 
 export const AI = createAI({
   actions: {
