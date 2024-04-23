@@ -3,18 +3,27 @@
 import { AI } from "@/app/action";
 import { TextareaWithText } from "@/components/TextareaWithText";
 import { Button } from "@/components/ui/button";
-import { useActions } from "ai/rsc";
+import { useAIState, useActions, useUIState } from "ai/rsc";
 
 type DocuPromptProps = {};
 
 const DocuPrompt = ({}: DocuPromptProps): React.JSX.Element => {
   const { submitDocs } = useActions<typeof AI>();
+  const [messages, setMessages] = useUIState<typeof AI>()
+  const [aiMessages, setAiMessages] = useAIState<typeof AI>()
+
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    handleClear()
 
     const formData = new FormData(event.currentTarget);
     const outline = await submitDocs(formData);
+  }
+
+  const handleClear = () => {
+    setMessages([])
+    setAiMessages([])
   }
 
   return (

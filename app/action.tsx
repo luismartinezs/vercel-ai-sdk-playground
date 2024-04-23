@@ -1,3 +1,4 @@
+import Outline from "@/components/Outline";
 import { Spinner } from "@/components/ui/spinner";
 import { outliner } from "@/lib/agents";
 import { ExperimentalMessage, ExperimentalUserMessage } from "ai";
@@ -30,6 +31,7 @@ async function submitDocs(formData?: FormData) {
   uiStream.update(<Spinner />);
 
   const outline = await outliner(uiStream, messages);
+  uiStream.append(<Outline {...outline} />);
 
   console.log(outline);
 

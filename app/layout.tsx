@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { AI } from "@/app/action";
+import { cn } from "@/lib/utils";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -20,9 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={fontSans.className}>
-        <AI>{children}</AI>
-      </body>
+      <body className={cn(fontSans.className, "dark")}>{children}</body>
     </html>
   );
 }
