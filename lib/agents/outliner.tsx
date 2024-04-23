@@ -3,6 +3,7 @@ import { createStreamableUI, createStreamableValue } from 'ai/rsc'
 import { ExperimentalMessage, experimental_streamObject } from 'ai'
 import { PartialOutline, outlineSchema } from '@/lib/schema/outline'
 import { env } from '@/env'
+import Outline from '@/components/Outline'
 
 export async function outliner(
   uiStream: ReturnType<typeof createStreamableUI>,
@@ -12,7 +13,7 @@ export async function outliner(
     apiKey: env.OPENAI_API_KEY,
   })
   const objectStream = createStreamableValue<PartialOutline>()
-  uiStream.update(<></>)
+  uiStream.update(<Outline {...objectStream.value} />)
 
   let finalOutline: PartialOutline = {}
   await experimental_streamObject({
