@@ -1,19 +1,21 @@
+"use server"
 import { Spinner } from "@/components/ui/spinner";
 import { createAI, createStreamableUI } from "ai/rsc";
+import { nanoid } from 'nanoid'
 
 async function callMockLLM(query: string): Promise<string> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve("1.18");
-    }, 1000);
+    }, 500);
   });
 }
 
 async function mockFetchData(url: string): Promise<string> {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve("some data");
-    }, 1000);
+      resolve("mock history data");
+    }, 500);
   });
 }
 
@@ -33,7 +35,7 @@ const Data = ({
 }) => (
   <div>
     <h1>EUR/USD</h1>
-    <p>Price: {price}</p>
+    <p>Price: ${price}</p>
     {chart}
   </div>
 );
@@ -53,7 +55,25 @@ export async function getData() {
     chart.done(<Chart data={historyData} />);
   })();
 
-  return ui;
+
+  return { id: nanoid(), ui: ui.value };
 }
 
-// not sure how to make this work
+const initialAIState: {
+  role: "user" | "assistant";
+  content: string;
+  id?: number;
+  name?: string;
+}[] = [];
+const initialUIState: {
+  id: string;
+  ui: React.ReactNode;
+}[] = [];
+
+export const AI = createAI({
+  actions: {
+    getData,
+  },
+  initialUIState,
+  initialAIState,
+});
