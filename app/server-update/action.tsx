@@ -50,7 +50,7 @@ export async function handleUserMessage(userInput: string) {
       const temperature = await getCityTemperature(res.city);
       card.done(
         <>
-          Here's the weather of {res.city}:
+          Here&apos;s the weather of {res.city}:
           <WeatherCard
             city={res.city}
             temperature={temperature}
