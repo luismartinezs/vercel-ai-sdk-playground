@@ -6,6 +6,7 @@ export const env = createEnv({
     OPENAI_API_MODEL: z.string().optional(),
     OPENAI_API_KEY: z.string().min(1),
     MISTRAL_API_KEY: z.string().min(1),
+    TAVILY_API_KEY: z.string().min(1),
   },
 
   /**
