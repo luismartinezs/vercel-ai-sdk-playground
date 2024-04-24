@@ -1,7 +1,5 @@
-import AiState from "@/components/AiState";
 import { AI } from "./action";
 import { Chat } from "./chat";
-import UiState from "@/components/UiState";
 
 export const runtime = "edge";
 

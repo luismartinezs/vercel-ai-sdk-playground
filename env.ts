@@ -5,6 +5,7 @@ export const env = createEnv({
   server: {
     OPENAI_API_MODEL: z.string().optional(),
     OPENAI_API_KEY: z.string().min(1),
+    MISTRAL_API_KEY: z.string().min(1),
   },
 
   /**

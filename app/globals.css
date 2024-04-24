@@ -12,9 +12,21 @@ label {
 
 input,
 textarea {
-  @apply bg-gray-700 text-gray-100;
+  @apply bg-gray-700 text-gray-100 p-2 rounded;
+}
+
+* > button ~ button {
+  @apply ml-2 my-2;
 }
 
 pre {
   @apply bg-gray-900 text-gray-100 p-4 rounded shadow-inner shadow-black text-cyan-500;
+}
+
+h1 {
+  @apply text-2xl font-bold text-white;
+}
+
+h2 {
+  @apply text-xl font-bold text-white;
 }

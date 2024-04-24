@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(fontSans.className, "dark flex min-h-screen flex-col items-center justify-between p-24 md:max-w-5xl mx-auto p-4 md:p-24")}>{children}</body>
+      <body suppressHydrationWarning={true} className={cn(fontSans.className, "dark flex min-h-screen flex-col items-center justify-between p-24 md:max-w-5xl mx-auto p-4 md:p-24")}>{children}</body>
     </html>
   );
 }
