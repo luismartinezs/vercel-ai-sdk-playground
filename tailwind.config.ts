@@ -45,6 +45,8 @@ const config = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        display: ["var(--font-display)", ...fontFamily.sans],
+        pixel: ["var(--font-pixel)", ...fontFamily.sans],
       },
     },
   },

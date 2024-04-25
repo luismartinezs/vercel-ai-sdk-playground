@@ -15,7 +15,7 @@ textarea {
   @apply bg-gray-700 text-gray-100 p-2 rounded;
 }
 
-* > button ~ button {
+*>button~button {
   @apply ml-2 my-2;
 }
 
@@ -29,4 +29,31 @@ h1 {
 
 h2 {
   @apply text-xl font-bold text-white;
+}
+
+.pixel-corners {
+  clip-path: polygon(0px 8px,
+      4px 8px,
+      4px 4px,
+      8px 4px,
+      8px 0px,
+      calc(100% - 8px) 0px,
+      calc(100% - 8px) 4px,
+      calc(100% - 4px) 4px,
+      calc(100% - 4px) 8px,
+      100% 8px,
+      100% calc(100% - 8px),
+      calc(100% - 4px) calc(100% - 8px),
+      calc(100% - 4px) calc(100% - 4px),
+      calc(100% - 8px) calc(100% - 4px),
+      calc(100% - 8px) 100%,
+      8px 100%,
+      8px calc(100% - 4px),
+      4px calc(100% - 4px),
+      4px calc(100% - 8px),
+      0px calc(100% - 8px));
+}
+
+.pixel-button-wrap {
+  filter: drop-shadow(rgba(0, 0, 0, 0.5) 0px 5px 0px);
 }

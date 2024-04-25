@@ -16,4 +16,21 @@ export default function plopGenerator(plop) {
       }
     ],
   });
+  plop.setGenerator("page", {
+    description: "Create a new Next.js page",
+    prompts: [
+      {
+        type: "input",
+        name: "name",
+        message: "page name",
+      },
+    ],
+    actions: [
+      {
+        type: "add",
+        path: "../app/{{kebabCase name}}/page.tsx",
+        templateFile: "templates/page/page.tsx.hbs",
+      },
+    ],
+  });
 }
