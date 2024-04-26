@@ -1,4 +1,4 @@
-function run() {
+function numbers() {
   let timer: NodeJS.Timeout | null = null
 
 
@@ -10,7 +10,7 @@ function run() {
 
       function pump() {
         timer = setTimeout(() => {
-          if (num < 5) {
+          if (num < 10) {
             controller.enqueue(num++)
             pump()
           } else {
@@ -24,6 +24,7 @@ function run() {
     },
     cancel() {
       timer && clearTimeout(timer)
+      console.log('Stream cancelled by the consumer')
     }
   })
 
@@ -32,16 +33,15 @@ function run() {
 
     while (true) {
       const { done, value } = await reader.read()
-      if (value > 5) {
-        console.log(`Stream reading cancelled`);
-        reader.cancel()
-      }
       if (done) break
       console.log(value)
+      if (value === 5) {
+        reader.cancel()
+      }
     }
   }
 
   readStream(stream)
 }
 
-run()
+numbers()
