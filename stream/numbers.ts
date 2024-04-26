@@ -22,15 +22,22 @@ function run() {
 
 
     },
-    cancel() {
+    cancel(reason) {
+      if (reason) {
+        console.log(`Stream reading cancelled: ${reason}`);
+      }
       timer && clearTimeout(timer)
     }
   })
 
   async function readStream(stream: ReadableStream) {
     const reader = stream.getReader()
+
     while (true) {
       const { done, value } = await reader.read()
+      if (value > 5) {
+        reader.cancel('Larger than 5')
+      }
       if (done) break
       console.log(value)
     }
