@@ -6,7 +6,7 @@ const OUTPUT_RATE = 1000;
     let i = 1
 
     while (true) {
-      console.log(`yielding ${i}`)
+      console.log(`streaming ${i}`)
       yield i++;
 
       await sleep(INPUT_RATE);
@@ -18,11 +18,23 @@ const OUTPUT_RATE = 1000;
 
   function createStream(iterator: AsyncGenerator): ReadableStream {
     return new ReadableStream({
-      async start(controller) {
-        for await (const value of iterator) {
+      // eager for await
+      // this will not work here because it's eagerly iterating through infinite values
+      // async start(controller) {
+      //   for await (const value of iterator) {
+      //     controller.enqueue(value)
+      //   }
+      //   controller.close()
+      // },
+      // pull handles both back-pressure and cancellation by manually pulling values from the iterator when reading from the stream
+      async pull(controller) {
+        const {value, done} = await iterator.next()
+
+        if (done) {
+          controller.close()
+        } else {
           controller.enqueue(value)
         }
-        controller.close()
       }
     })
   }
@@ -31,9 +43,9 @@ const OUTPUT_RATE = 1000;
     const stream = createStream(integers())
     const reader = stream.getReader()
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 3; i++) {
       const { value } = await reader.read()
-      console.log(`read ${value}`)
+      console.log(`reading ${value}`)
 
       await sleep(OUTPUT_RATE)
     }
