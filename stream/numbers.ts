@@ -22,10 +22,7 @@ function run() {
 
 
     },
-    cancel(reason) {
-      if (reason) {
-        console.log(`Stream reading cancelled: ${reason}`);
-      }
+    cancel() {
       timer && clearTimeout(timer)
     }
   })
@@ -36,7 +33,8 @@ function run() {
     while (true) {
       const { done, value } = await reader.read()
       if (value > 5) {
-        reader.cancel('Larger than 5')
+        console.log(`Stream reading cancelled`);
+        reader.cancel()
       }
       if (done) break
       console.log(value)
