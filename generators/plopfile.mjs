@@ -31,6 +31,12 @@ export default function plopGenerator(plop) {
         path: "../app/{{kebabCase name}}/page.tsx",
         templateFile: "templates/page/page.tsx.hbs",
       },
+      {
+        type: "modify",
+        path: "../components/header.tsx",
+        pattern: /\/\/ append new link/g,
+        template: `{ href: "/{{kebabCase name}}", label: "{{properCase name}}" },\n  // append new link`
+      }
     ],
   });
 }
