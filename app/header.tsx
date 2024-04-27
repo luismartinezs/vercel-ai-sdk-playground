@@ -6,6 +6,7 @@ const links = [
   { href: "/streaming", label: "Streaming" },
   { href: "/completion", label: "Completion" },
   { href: "/assistant", label: "Assistant" },
+  { href: "/langchain", label: "Langchain" },
   // append new link
 ];
 
