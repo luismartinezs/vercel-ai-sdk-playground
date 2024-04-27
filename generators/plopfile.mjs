@@ -33,7 +33,7 @@ export default function plopGenerator(plop) {
       },
       {
         type: "modify",
-        path: "../components/header.tsx",
+        path: "../app/header.tsx",
         pattern: /\/\/ append new link/g,
         template: `{ href: "/{{kebabCase name}}", label: "{{properCase name}}" },\n  // append new link`
       }
