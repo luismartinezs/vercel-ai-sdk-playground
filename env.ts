@@ -8,6 +8,7 @@ export const env = createEnv({
     MISTRAL_API_KEY: z.string().min(1),
     TAVILY_API_KEY: z.string().min(1),
     HUGGINGFACE_API_KEY: z.string().min(1),
+    ASSISTANT_ID: z.string().min(1),
   },
 
   /**
