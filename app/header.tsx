@@ -7,6 +7,7 @@ const links = [
   { href: "/completion", label: "Completion" },
   { href: "/assistant", label: "Assistant" },
   { href: "/langchain", label: "Langchain" },
+  { href: "/doge", label: "Doge" },
   // append new link
 ];
 

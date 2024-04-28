@@ -9,6 +9,7 @@ export const env = createEnv({
     TAVILY_API_KEY: z.string().min(1),
     HUGGINGFACE_API_KEY: z.string().min(1),
     ASSISTANT_ID: z.string().min(1),
+    DOGE_ID: z.string().min(1),
   },
 
   /**
